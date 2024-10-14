@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random PNG Loader Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div class="toggle-container">
+        <div class="timer">Time left: <span id="timer">9:00</span></div>
+        <div id="timer-container"></div>
+        <span class="info-icon" id="info-icon">ℹ️</span>
+        <!-- Információs ikon -->
+      </div>
+
+      <div id="rules-container" class="rules-container" style="display: none">
+        <button id="close-rules" class="close-button">x</button>
+        <!-- Bezáró gomb -->
+        <div id="game-setup">
+          <div>
+            <label for="game-duration">Game Duration (minutes):</label>
+            <input
+              type="number"
+              id="game-duration"
+              value="9"
+              min="1"
+              style="width: 50px"
+            />
+            <button onclick="setGameDuration()">Set</button>
+          </div>
+          <div>
+            <label for="rule-duration">Rule Duration (tasks):</label>
+            <input
+              type="number"
+              id="rule-duration"
+              value="3"
+              min="1"
+              style="width: 50px"
+            />
+            <button onclick="setRuleDuration()">Set</button>
+            <div class="switch-container">
+              <label for="color-feedback">Color feedback: </label>
+              <input type="checkbox" id="color-feedback" checked />
+            </div>
+          </div>
+          <div>
+            <label for="total-tasks">Number of Tasks:</label>
+            <select id="total-tasks">
+              <option value="6">6</option>
+              <option value="40">40</option>
+              <option value="60">60</option>
+            </select>
+            <button onclick="setTotalTasks()">Set</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-container">
+        <div id="ruleDisplay"></div>
+        <div class="numbers hidden" id="numbers">4 and 2</div>
+
+        <div class="answer-container">
+          <div id="correct-answer" style="color: red"></div>
+          <input type="text" id="answer" placeholder="Your answer" readonly />
+        </div>
+
+        <div id="buttons" class="buttons">
+          <button onclick="addToInput(1)">1</button>
+          <button onclick="addToInput(2)">2</button>
+          <button onclick="addToInput(3)">3</button>
+          <button onclick="addToInput(4)">4</button>
+          <button onclick="addToInput(5)">5</button>
+          <button onclick="addToInput(6)">6</button>
+          <button onclick="addToInput(7)">7</button>
+          <button onclick="addToInput(8)">8</button>
+          <button onclick="addToInput(9)">9</button>
+          <button class="clear" onclick="clearInput()">C</button>
+          <button onclick="addToInput(0)">0</button>
+
+          <button class="submit" onclick="submitAnswer()">S</button>
+        </div>
+
+        <div class="result" id="result"></div>
+      </div>
+      <button id="start-game" onclick="startGame()">Start Game</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,329 @@
+body {
+  font-family: "Roboto", "Helvetica", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f7f7f7;
+}
+#container {
+  display: flex;
+  background-color: #c1dfef;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  min-height: 600px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+#gameContainer {
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+#instruction {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: none;
+}
+
+#imageContainer {
+  display: none; /* Initially hidden */
+  width: 95%;
+  height: 95%;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+}
+
+.image-div {
+  position: relative;
+  width: 30%;
+  height: 30%;
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.random-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: red;
+  z-index: 1;
+}
+
+.random-circle.white {
+  background-color: white;
+}
+
+.small-shape {
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.small-shape.circle {
+  border-radius: 50%;
+  background-color: black;
+}
+
+.small-shape.square {
+  background-color: black;
+}
+#start-game {
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(205, 218, 50);
+  color: #223968;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+  font-weight: 700 !important;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  width: 80%;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+#start-game:hover {
+  background-color: #cdda32;
+}
+#finalInput {
+  height: 40px;
+  border-radius: 20px 0px 0px 20px;
+  border: solid 0px white;
+  padding-left: 10px;
+  min-width: 200px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+button#submitButton {
+  height: 44px;
+  border-radius: 0px 20px 20px 0px;
+  border: solid 0px white;
+  background-color: #cdda32;
+  min-width: 90px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+#timer-container {
+  width: 40px; /* A méretet a timer mixin alapján állítottuk be */
+  height: 40px; /* A méretet a timer mixin alapján állítottuk be */
+}
+.wrapper {
+  position: relative;
+  display: none;
+  background: white;
+  width: 40px; /* A méretet a timer mixin alapján állítottuk be */
+  height: 40px; /* A méretet a timer mixin alapján állítottuk be */
+  box-sizing: border-box;
+}
+
+.wrapper,
+.wrapper * {
+  box-sizing: border-box; /* Box sizing beállítása */
+}
+
+.wrapper .pie {
+  width: 50%;
+  height: 100%;
+  transform-origin: 100% 50%;
+  position: absolute;
+  background: #08c; /* Szín beállítása a timer mixin alapján */
+  border: 5px solid rgba(0, 0, 0, 0.5); /* Border beállítása a timer mixin alapján */
+}
+
+.wrapper .spinner {
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  z-index: 200;
+  border-right: none;
+  animation: rota 4s linear infinite; /* Időtartam beállítása a timer mixin alapján */
+}
+
+.wrapper .spinner,
+.wrapper .filler,
+.wrapper .mask {
+  animation-play-state: paused; /* Alapértelmezett állapot: paused */
+}
+
+.wrapper .filler {
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  left: 50%;
+  opacity: 0;
+  z-index: 100;
+  animation: opa 4s steps(1, end) infinite reverse; /* Időtartam beállítása a timer mixin alapján */
+  border-left: none;
+}
+
+.wrapper .mask {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  opacity: 1;
+  z-index: 300;
+  animation: opa 4s steps(1, end) infinite; /* Időtartam beállítása a timer mixin alapján */
+}
+
+@keyframes rota {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes opa {
+  0% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Toggle switch stílus */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Balra igazítás */
+  margin-top: -10px; /* Pozitív margó */
+  margin-bottom: 10px;
+  margin-left: 0; /* Az eltolás eltávolítása */
+  border-radius: 15px; /* Lekerekített sarkok */
+  background-color: white; /* Háttérszín */
+  padding: 5px 10px; /* Padding a jobb megjelenés érdekében */
+  width: calc(100% - 20px); /* Szélesség csökkentése a padding miatt */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Árnyék a mélység érdekében */
+}
+
+.info-icon {
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  right: 26px;
+  position: absolute;
+  background-color: #ededed;
+  border-radius: 10px;
+  width: 41px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rules-container {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  /* top: 0; */
+  max-height: 550px;
+  max-width: 100%;
+  overflow: auto;
+  z-index: 10;
+  display: none;
+  margin: 0px 8px 0px -12px;
+  padding: 10px;
+  width: 90%;
+  min-height: 400px;
+  margin: auto;
+}
+#rules-image {
+  max-width: 90%;
+}
+
+.close-button {
+  position: absolute; /* Abszolút pozicionálás */
+  top: 10px; /* Tetején */
+  right: 10px; /* Jobb szélén */
+  background-color: #f44336; /* Piros háttér */
+  color: white; /* Fehér szöveg */
+  border: none; /* Nincs határ */
+  border-radius: 5px; /* Lekerekítés */
+  padding: 5px 10px; /* Padding */
+  cursor: pointer; /* Kézkurzor */
+  font-size: 16px; /* Betűméret */
+}
+
+.close-button:hover {
+  background-color: #e53935; /* Sötétebb piros hover állapot */
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 250px;
+}
+#buttons button {
+  font-size: 30px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background-color: white;
+  border: 0px;
+}
+
+.clear {
+  background-color: #ffc400 !important;
+}
+.submit {
+  background-color: #cdda32 !important;
+}
+
+.hidden {
+  display: none;
+}
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 500px !important;
+  align-items: center;
+}
+div#numbers {
+  font-size: 40px;
+}
+div#rule {
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px 5px;
+  font-size: 20px;
+}
+
+div#ruleDisplay {
+  font-size: 17px;
+  text-align: left;
+}
+#ruleDisplay span {
+  font-weight: 700;
+}
