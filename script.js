@@ -54,7 +54,7 @@ let numbers = generateNumbers(); // Generate numbers initially
 
 function setGameDuration() {
   const durationInput = document.getElementById("game-duration").value;
-  gameDuration = parseInt(durationInput) * 60;
+  gameDuration = parseInt(durationInput) * 1;
   timeLeft = gameDuration;
   updateTimerDisplay();
 }
